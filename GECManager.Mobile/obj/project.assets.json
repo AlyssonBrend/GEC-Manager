@@ -1,0 +1,345 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-android34.0": {},
+    "net8.0-android34.0/android-arm": {},
+    "net8.0-android34.0/android-arm64": {},
+    "net8.0-android34.0/android-x64": {},
+    "net8.0-android34.0/android-x86": {},
+    "net8.0-android34.0/iossimulator-x64": {},
+    "net8.0-android34.0/maccatalyst-x64": {},
+    "net8.0-android34.0/win10-x64": {},
+    "net8.0-ios18.0": {},
+    "net8.0-ios18.0/android-arm": {},
+    "net8.0-ios18.0/android-arm64": {},
+    "net8.0-ios18.0/android-x64": {},
+    "net8.0-ios18.0/android-x86": {},
+    "net8.0-ios18.0/iossimulator-x64": {},
+    "net8.0-ios18.0/maccatalyst-x64": {},
+    "net8.0-ios18.0/win10-x64": {},
+    "net8.0-maccatalyst18.0": {},
+    "net8.0-maccatalyst18.0/android-arm": {},
+    "net8.0-maccatalyst18.0/android-arm64": {},
+    "net8.0-maccatalyst18.0/android-x64": {},
+    "net8.0-maccatalyst18.0/android-x86": {},
+    "net8.0-maccatalyst18.0/iossimulator-x64": {},
+    "net8.0-maccatalyst18.0/maccatalyst-x64": {},
+    "net8.0-maccatalyst18.0/win10-x64": {},
+    "net8.0-windows10.0.19041": {},
+    "net8.0-windows10.0.19041/android-arm": {},
+    "net8.0-windows10.0.19041/android-arm64": {},
+    "net8.0-windows10.0.19041/android-x64": {},
+    "net8.0-windows10.0.19041/android-x86": {},
+    "net8.0-windows10.0.19041/iossimulator-x64": {},
+    "net8.0-windows10.0.19041/maccatalyst-x64": {},
+    "net8.0-windows10.0.19041/win10-x64": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net8.0-android34.0": [
+      "Microsoft.Extensions.Logging.Debug >= 8.0.1",
+      "Microsoft.Maui.Controls >= 8.0.100",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.21"
+    ],
+    "net8.0-ios18.0": [
+      "Microsoft.Extensions.Logging.Debug >= 8.0.1",
+      "Microsoft.Maui.Controls >= 8.0.100",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.21"
+    ],
+    "net8.0-maccatalyst18.0": [
+      "Microsoft.Extensions.Logging.Debug >= 8.0.1",
+      "Microsoft.Maui.Controls >= 8.0.100",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.100",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.21"
+    ],
+    "net8.0-windows10.0.19041": [
+      "Microsoft.Extensions.Logging.Debug >= 8.0.1",
+      "Microsoft.Maui.Controls >= 8.0.100",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.100"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\alyss\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Mobile.csproj",
+      "projectName": "GECManager.Mobile",
+      "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Mobile.csproj",
+      "packagesPath": "C:\\Users\\alyss\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\obj\\",
+      "projectStyle": "PackageReference",
+      "crossTargeting": true,
+      "configFilePaths": [
+        "C:\\Users\\alyss\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-android",
+        "net8.0-ios",
+        "net8.0-maccatalyst",
+        "net8.0-windows10.0.19041.0"
+      ],
+      "sources": {
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-android34.0": {
+          "targetAlias": "net8.0-android",
+          "projectReferences": {
+            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
+              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
+            }
+          }
+        },
+        "net8.0-ios18.0": {
+          "targetAlias": "net8.0-ios",
+          "projectReferences": {
+            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
+              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
+            }
+          }
+        },
+        "net8.0-maccatalyst18.0": {
+          "targetAlias": "net8.0-maccatalyst",
+          "projectReferences": {
+            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
+              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
+            }
+          }
+        },
+        "net8.0-windows10.0.19041": {
+          "targetAlias": "net8.0-windows10.0.19041.0",
+          "projectReferences": {
+            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
+              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0-android34.0": {
+        "targetAlias": "net8.0-android",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Debug": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.21, )",
+            "autoReferenced": true
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.Android": {
+            "privateAssets": "all"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+      },
+      "net8.0-ios18.0": {
+        "targetAlias": "net8.0-ios",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Debug": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.21, )",
+            "autoReferenced": true
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.iOS": {
+            "privateAssets": "all"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+      },
+      "net8.0-maccatalyst18.0": {
+        "targetAlias": "net8.0-maccatalyst",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Debug": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.21, )",
+            "autoReferenced": true
+          }
+        },
+        "imports": [
+          "xamarinios10",
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.MacCatalyst": {
+            "privateAssets": "all"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+      },
+      "net8.0-windows10.0.19041": {
+        "targetAlias": "net8.0-windows10.0.19041.0",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Debug": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.100, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Windows.SDK.NET.Ref",
+            "version": "[10.0.19041.56, 10.0.19041.56]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.Windows.SDK.NET.Ref": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "android-arm": {
+        "#import": []
+      },
+      "android-arm64": {
+        "#import": []
+      },
+      "android-x64": {
+        "#import": []
+      },
+      "android-x86": {
+        "#import": []
+      },
+      "iossimulator-x64": {
+        "#import": []
+      },
+      "maccatalyst-x64": {
+        "#import": []
+      },
+      "win10-x64": {
+        "#import": []
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.WindowsAppSDK.1.5.240802000' from 'https://api.nuget.org/v3-flatcontainer/microsoft.windowsappsdk/1.5.240802000/microsoft.windowsappsdk.1.5.240802000.nupkg'.\r\nReceived an unexpected EOF or 0 bytes from the transport stream."
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "The feed 'nuget.org [https://api.nuget.org/v3/index.json]' lists package 'Microsoft.WindowsAppSDK.1.5.240802000' but multiple attempts to download the nupkg have failed. The feed is either invalid or required packages were removed while the current operation was in progress. Verify the package exists on the feed and try again."
+    }
+  ]
+}

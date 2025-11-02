@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GECManager.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca7d419040335a79e68d850877fdefbf78f35505")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+afe2a3f9e7cceeb3713ac88679f68cf4b4fec6b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("GECManager.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GECManager.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

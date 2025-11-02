@@ -2,6 +2,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped(sp => 
+    new HttpClient { BaseAddress = new Uri("http://localhost:5000") });
 builder.Services.AddCors(opt => 
 {
     opt.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
