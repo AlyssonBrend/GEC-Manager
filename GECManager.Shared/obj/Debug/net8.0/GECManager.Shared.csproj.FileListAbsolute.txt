@@ -1,0 +1,12 @@
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\bin\Debug\net8.0\GECManager.Shared.deps.json
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\bin\Debug\net8.0\GECManager.Shared.dll
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\bin\Debug\net8.0\GECManager.Shared.pdb
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.AssemblyInfoInputs.cache
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.AssemblyInfo.cs
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.csproj.CoreCompileInputs.cache
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.sourcelink.json
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.dll
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\refint\GECManager.Shared.dll
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\GECManager.Shared.pdb
+C:\Users\alyss\Documents\Projetos\GEC-Manager\GECManager.Shared\obj\Debug\net8.0\ref\GECManager.Shared.dll

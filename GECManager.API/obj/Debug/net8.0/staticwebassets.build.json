@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "KaiZ5qlpIqeJLYJcDXgTmJZ+uAVF9j3VBA2u5RJW+Fk=",
+  "Source": "GECManager.API",
+  "BasePath": "_content/GECManager.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
