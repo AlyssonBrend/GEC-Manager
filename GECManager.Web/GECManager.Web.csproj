@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GECManager.Shared\GECManager.Shared.csproj" />
+    <ProjectReference Include="GECManager.Web.csproj" />
   </ItemGroup>
 
 </Project>
