@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GECManager.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1622080624ff55f8dca7b88418a13f1e4c314733")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b7c0e762e57bca903fb69f72d20d7eff6cbffd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("GECManager.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GECManager.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

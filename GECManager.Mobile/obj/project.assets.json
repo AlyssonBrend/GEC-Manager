@@ -33456,8 +33456,8 @@
     },
     "GECManager.Shared/1.0.0": {
       "type": "project",
-      "path": "GECManager.Shared/GECManager.Shared.csproj",
-      "msbuildProject": "GECManager.Shared/GECManager.Shared.csproj"
+      "path": "../GECManager.Shared/GECManager.Shared.csproj",
+      "msbuildProject": "../GECManager.Shared/GECManager.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -33519,9 +33519,6 @@
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
           "projectReferences": {
-            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj": {
-              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj"
-            },
             "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
               "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
             }
@@ -33530,9 +33527,6 @@
         "net8.0-ios18.0": {
           "targetAlias": "net8.0-ios",
           "projectReferences": {
-            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj": {
-              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj"
-            },
             "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
               "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
             }
@@ -33541,9 +33535,6 @@
         "net8.0-maccatalyst18.0": {
           "targetAlias": "net8.0-maccatalyst",
           "projectReferences": {
-            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj": {
-              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj"
-            },
             "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
               "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
             }
@@ -33552,9 +33543,6 @@
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "projectReferences": {
-            "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj": {
-              "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Mobile\\GECManager.Shared\\GECManager.Shared.csproj"
-            },
             "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
               "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj"
             }
