@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GECManager.Mobile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+3b7c0e762e57bca903fb69f72d20d7eff6cbffd4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+f694552c9e8bab8f8ae529708844992d104666ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("GECManager.Mobile")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GECManager.Mobile")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {}
+    "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
+    "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
         "projectName": "GECManager.Shared",
-        "projectPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
+        "projectPath": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
         "packagesPath": "C:\\Users\\alyss\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alyss\\Documents\\Projetos\\GEC-Manager\\GECManager.Shared\\obj\\",
+        "outputPath": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alyss\\AppData\\Roaming\\NuGet\\NuGet.Config"
