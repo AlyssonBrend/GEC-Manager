@@ -1,0 +1,83 @@
+@page "/chat/{ProjectId:int}"
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<PageTitle>Chat — Projeto @ProjectId</PageTitle>
+
+<div class="d-flex flex-column" style="height:80vh">
+    <div class="d-flex align-items-center mb-2 gap-2">
+        <a href="/projects/@ProjectId" class="btn btn-sm btn-outline-secondary">← Projeto</a>
+        <h5 class="mb-0">Chat — Projeto @ProjectId</h5>
+        <span class="badge @(_connected ? "bg-success" : "bg-secondary")">
+            @(_connected ? "Conectado" : "Desconectado")
+        </span>
+    </div>
+
+    <div class="flex-grow-1 border rounded p-3 overflow-auto bg-light mb-2" id="chatBox">
+        @foreach (var m in _messages)
+        {
+            <div class="mb-1">
+                <span class="fw-semibold">@m.User</span>
+                <span class="text-muted small ms-1">@m.Time.ToString("HH:mm")</span>
+                <div>@m.Text</div>
+            </div>
+        }
+    </div>
+
+    <div class="input-group">
+        <input class="form-control" placeholder="Mensagem..." @bind="_input"
+               @onkeydown="OnKeyDown" />
+        <button class="btn btn-primary" @onclick="SendMessage" disabled="@(!_connected)">Enviar</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public int ProjectId { get; set; }
+
+    record ChatMsg(string User, string Text, DateTime Time);
+    List<ChatMsg> _messages = new();
+    string _input = "";
+    bool _connected;
+    IJSObjectReference? _hub;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
+        var user = await Auth.GetCurrentUserAsync();
+        var token = await JS.InvokeAsync<string?>("localStorage.getItem", "jwt_token");
+
+        _hub = await JS.InvokeAsync<IJSObjectReference>("chatHubConnect",
+            $"http://localhost:7000/hubs/chat",
+            token ?? "",
+            ProjectId.ToString(),
+            DotNetObjectReference.Create(this));
+        _connected = _hub is not null;
+    }
+
+    [JSInvokable]
+    public void OnReceiveMessage(string user, string text, DateTime time)
+    {
+        _messages.Add(new(user, text, time));
+        InvokeAsync(StateHasChanged);
+    }
+
+    async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(_input) || _hub is null) return;
+        await JS.InvokeVoidAsync("chatHubSend", _hub, ProjectId.ToString(), _input);
+        _input = "";
+    }
+
+    async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await SendMessage();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hub is not null)
+            await JS.InvokeVoidAsync("chatHubDisconnect", _hub);
+    }
+}

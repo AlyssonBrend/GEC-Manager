@@ -1,0 +1,134 @@
+@page "/projects/{Id:int}"
+@inject TaskService TaskSvc
+@inject ProjectService ProjSvc
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<PageTitle>@_project?.Name — GEC Manager</PageTitle>
+
+@if (_project is null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <a href="/projects" class="btn btn-sm btn-outline-secondary me-2">← Projetos</a>
+            <h3 class="d-inline">@_project.Name</h3>
+            <span class="text-muted ms-2">@_project.Description</span>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/chat/@Id" class="btn btn-outline-secondary">💬 Chat</a>
+            <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Tarefa</button>
+        </div>
+    </div>
+
+    @if (_showForm)
+    {
+        <div class="card mb-4 p-3">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <input class="form-control" placeholder="Título" @bind="_dto.Title" />
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" placeholder="Descrição" @bind="_dto.Description" />
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" type="date" @bind="_dto.DueDate" />
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-success w-100" @onclick="CreateTask">Criar tarefa</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row g-3">
+        @foreach (var col in _columns)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header fw-bold @col.HeaderClass">@col.Label</div>
+                    <div class="card-body p-2">
+                        @foreach (var t in _tasks.Where(t => t.Status == col.Status))
+                        {
+                            <div class="card mb-2 shadow-sm">
+                                <div class="card-body py-2 px-3">
+                                    <div class="fw-semibold">@t.Title</div>
+                                    <div class="text-muted small">@t.Description</div>
+                                    @if (t.DueDate.HasValue)
+                                    {
+                                        <div class="small text-danger">⏰ @t.DueDate.Value.ToString("dd/MM/yyyy")</div>
+                                    }
+                                    <div class="d-flex gap-1 mt-2">
+                                        @if (t.Status != TaskItemStatus.Pending)
+                                        {
+                                            <button class="btn btn-xs btn-outline-secondary" style="font-size:.75rem;padding:1px 6px"
+                                                @onclick="() => MoveTask(t, t.Status - 1)">←</button>
+                                        }
+                                        @if (t.Status != TaskItemStatus.Done)
+                                        {
+                                            <button class="btn btn-xs btn-outline-primary" style="font-size:.75rem;padding:1px 6px"
+                                                @onclick="() => MoveTask(t, t.Status + 1)">→</button>
+                                        }
+                                        <button class="btn btn-xs btn-outline-danger ms-auto" style="font-size:.75rem;padding:1px 6px"
+                                            @onclick="() => DeleteTask(t.Id)">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    Project? _project;
+    List<TaskItem> _tasks = new();
+    TaskItemDTO _dto = new();
+    bool _showForm;
+
+    record Column(string Label, TaskItemStatus Status, string HeaderClass);
+    readonly Column[] _columns =
+    [
+        new("Pendente", TaskItemStatus.Pending, "bg-warning text-dark"),
+        new("Em andamento", TaskItemStatus.InProgress, "bg-info text-white"),
+        new("Concluído", TaskItemStatus.Done, "bg-success text-white"),
+    ];
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
+        _project = await ProjSvc.GetAsync(Id);
+        await LoadTasks();
+    }
+
+    async Task LoadTasks() => _tasks = await TaskSvc.GetByProjectAsync(Id);
+
+    async Task CreateTask()
+    {
+        if (string.IsNullOrWhiteSpace(_dto.Title)) return;
+        _dto.ProjectId = Id;
+        await TaskSvc.CreateAsync(_dto);
+        _dto = new();
+        _showForm = false;
+        await LoadTasks();
+    }
+
+    async Task MoveTask(TaskItem t, TaskItemStatus newStatus)
+    {
+        await TaskSvc.UpdateStatusAsync(t.Id, newStatus);
+        await LoadTasks();
+    }
+
+    async Task DeleteTask(int id)
+    {
+        await TaskSvc.DeleteAsync(id);
+        await LoadTasks();
+    }
+}

@@ -1,0 +1,88 @@
+@page "/projects"
+@inject ProjectService ProjSvc
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<PageTitle>Projetos — GEC Manager</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Projetos</h3>
+    <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Novo projeto</button>
+</div>
+
+@if (_showForm)
+{
+    <div class="card mb-4 p-3">
+        <div class="row g-2">
+            <div class="col-md-4">
+                <input class="form-control" placeholder="Nome" @bind="_dto.Name" />
+            </div>
+            <div class="col-md-6">
+                <input class="form-control" placeholder="Descrição" @bind="_dto.Description" />
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success w-100" @onclick="CreateProject">Criar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (_projects is null)
+{
+    <p><em>Carregando...</em></p>
+}
+else if (_projects.Count == 0)
+{
+    <p class="text-muted">Nenhum projeto encontrado.</p>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var p in _projects)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name</h5>
+                        <p class="card-text text-muted">@p.Description</p>
+                        <p class="small">@p.Tasks.Count tarefa(s)</p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <a href="/projects/@p.Id" class="btn btn-sm btn-outline-primary">Abrir</a>
+                        <a href="/chat/@p.Id" class="btn btn-sm btn-outline-secondary">Chat</a>
+                        <button class="btn btn-sm btn-outline-danger ms-auto" @onclick="() => DeleteProject(p.Id)">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    List<Project>? _projects;
+    ProjectDTO _dto = new();
+    bool _showForm;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
+        await LoadProjects();
+    }
+
+    async Task LoadProjects() => _projects = await ProjSvc.GetAllAsync();
+
+    async Task CreateProject()
+    {
+        if (string.IsNullOrWhiteSpace(_dto.Name)) return;
+        await ProjSvc.CreateAsync(_dto);
+        _dto = new();
+        _showForm = false;
+        await LoadProjects();
+    }
+
+    async Task DeleteProject(int id)
+    {
+        await ProjSvc.DeleteAsync(id);
+        await LoadProjects();
+    }
+}

@@ -5,10 +5,14 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using GECManager.Api.Data;
 using GECManager.Api.Services;
+using GECManager.Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opts =>
+        opts.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -20,27 +24,28 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme."
+        Description = "Insira o token JWT: Bearer {token}"
+    };
+    var schemeRef = new OpenApiSecurityScheme
+    {
+        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
     };
     c.AddSecurityDefinition("Bearer", jwtScheme);
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        { jwtScheme, Array.Empty<string>() }
-    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement { { schemeRef, Array.Empty<string>() } });
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy
-        .WithOrigins("http://localhost:5000", "https://localhost:5001")
+        .WithOrigins("http://localhost:5093", "https://localhost:7045", "http://localhost:5000")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials()
 ));
 
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "ReplaceWithASecretKey123!");
+var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "GECManager_SuperSecretKey_2024_MustBe32CharsLong!");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,11 +63,35 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                context.Token = accessToken;
+            return Task.CompletedTask;
+        }
+    };
 });
 
+builder.Services.AddAuthorization(opts =>
+{
+    opts.AddPolicy("AdminOnly", p => p.RequireRole("Admin"));
+    opts.AddPolicy("AdminOrLeader", p => p.RequireRole("Admin", "Leader"));
+});
+
+builder.Services.AddSignalR();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -75,5 +104,6 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();

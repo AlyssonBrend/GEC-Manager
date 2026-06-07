@@ -1,0 +1,98 @@
+@page "/"
+@inject DashboardService DashSvc
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<PageTitle>Dashboard — GEC Manager</PageTitle>
+
+<h3 class="mb-4">Dashboard</h3>
+
+@if (_stats is null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body text-center">
+                    <h2>@_stats.TotalProjects</h2>
+                    <p class="mb-0">Projetos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card text-white bg-secondary h-100">
+                <div class="card-body text-center">
+                    <h2>@_stats.TotalTasks</h2>
+                    <p class="mb-0">Tarefas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2">
+            <div class="card text-white bg-warning h-100">
+                <div class="card-body text-center">
+                    <h2>@_stats.ByStatus.Pending</h2>
+                    <p class="mb-0">Pendentes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body text-center">
+                    <h2>@_stats.ByStatus.InProgress</h2>
+                    <p class="mb-0">Em andamento</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2">
+            <div class="card text-white bg-success h-100">
+                <div class="card-body text-center">
+                    <h2>@_stats.ByStatus.Done</h2>
+                    <p class="mb-0">Concluídas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5>Minhas tarefas</h5>
+    @if (_stats.MyTasks.Count == 0)
+    {
+        <p class="text-muted">Nenhuma tarefa atribuída a você.</p>
+    }
+    else
+    {
+        <table class="table table-hover">
+            <thead><tr><th>Tarefa</th><th>Status</th><th>Prazo</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var t in _stats.MyTasks)
+                {
+                    <tr>
+                        <td>@t.Title</td>
+                        <td><span class="badge @StatusBadge(t.Status)">@t.Status</span></td>
+                        <td>@(t.DueDate?.ToString("dd/MM/yyyy") ?? "—")</td>
+                        <td><a href="/projects/@t.ProjectId" class="btn btn-sm btn-outline-primary">Ver</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    DashboardStats? _stats;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
+        _stats = await DashSvc.GetStatsAsync();
+    }
+
+    static string StatusBadge(string status) => status switch
+    {
+        "Done" => "bg-success",
+        "InProgress" => "bg-info",
+        _ => "bg-warning text-dark"
+    };
+}

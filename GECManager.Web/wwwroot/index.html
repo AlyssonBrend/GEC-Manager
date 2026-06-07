@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GECManager.Web</title>
+    <title>GEC Manager</title>
     <base href="/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -22,10 +22,32 @@
     </div>
 
     <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
+        Ocorreu um erro inesperado.
+        <a href="" class="reload">Recarregar</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        window.chatHubConnect = async function (url, token, projectId, dotnetRef) {
+            const conn = new signalR.HubConnectionBuilder()
+                .withUrl(url, { accessTokenFactory: () => token })
+                .withAutomaticReconnect()
+                .build();
+            conn.on("ReceiveMessage", (user, text, time) => {
+                dotnetRef.invokeMethodAsync("OnReceiveMessage", user, text, time);
+            });
+            await conn.start();
+            await conn.invoke("JoinProject", projectId);
+            return conn;
+        };
+        window.chatHubSend = async function (conn, projectId, message) {
+            await conn.invoke("SendMessage", projectId, message);
+        };
+        window.chatHubDisconnect = async function (conn) {
+            await conn.stop();
+        };
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 

@@ -1,0 +1,60 @@
+@page "/register"
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="container mt-5" style="max-width:480px">
+    <div class="card shadow">
+        <div class="card-body p-4">
+            <h4 class="mb-4 text-center">GEC Manager — Cadastro</h4>
+            @if (!string.IsNullOrEmpty(_error))
+            {
+                <div class="alert alert-danger">@_error</div>
+            }
+            @if (_success)
+            {
+                <div class="alert alert-success">Conta criada! <a href="/login">Faça login</a>.</div>
+            }
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" @bind="_dto.Name" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">E-mail</label>
+                <input class="form-control" type="email" @bind="_dto.Email" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Senha</label>
+                <input class="form-control" type="password" @bind="_dto.Password" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Perfil</label>
+                <select class="form-select" @bind="_dto.Role">
+                    <option value="Member">Membro</option>
+                    <option value="Leader">Líder</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+            <button class="btn btn-success w-100" @onclick="HandleRegister" disabled="@_loading">
+                @(_loading ? "Cadastrando..." : "Criar conta")
+            </button>
+            <hr />
+            <p class="text-center mb-0">Já tem conta? <a href="/login">Entrar</a></p>
+        </div>
+    </div>
+</div>
+
+@code {
+    UserRegisterDTO _dto = new();
+    string _error = "";
+    bool _loading, _success;
+
+    async Task HandleRegister()
+    {
+        _error = "";
+        _loading = true;
+        _success = await Auth.RegisterAsync(_dto);
+        _loading = false;
+        if (!_success) _error = "Erro ao cadastrar. Verifique os dados.";
+        else _dto = new();
+    }
+}

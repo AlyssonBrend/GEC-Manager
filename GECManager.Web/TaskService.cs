@@ -7,5 +7,5 @@ public class TaskService
     public TaskService(HttpClient http) => _http = http;
 
     public async Task<List<ProjectTask>> GetTasksAsync() =>
-        await _http.GetFromJsonAsync<List<ProjectTask>>("api/tasks");
+        await _http.GetFromJsonAsync<List<ProjectTask>>("api/tasks") ?? new();
 }

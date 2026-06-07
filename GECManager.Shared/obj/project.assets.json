@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\alyss\\OneDrive\\Desktop\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
       "projectName": "GECManager.Shared",
-      "projectPath": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
+      "projectPath": "C:\\Users\\alyss\\OneDrive\\Desktop\\Projetos\\GEC-Manager\\GECManager.Shared\\GECManager.Shared.csproj",
       "packagesPath": "C:\\Users\\alyss\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alyss\\OneDrive\\Documentos\\Projetos\\GEC-Manager\\GECManager.Shared\\obj\\",
+      "outputPath": "C:\\Users\\alyss\\OneDrive\\Desktop\\Projetos\\GEC-Manager\\GECManager.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alyss\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,7 +26,6 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -65,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

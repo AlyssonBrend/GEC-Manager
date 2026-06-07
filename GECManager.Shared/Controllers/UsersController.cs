@@ -15,6 +15,7 @@ public class UsersController : ControllerBase
     public UsersController(ApplicationDbContext db) => _db = db;
 
     [HttpGet]
+    [Authorize(Policy = "AdminOrLeader")]
     public async Task<ActionResult<IEnumerable<User>>> GetAll()
         => Ok(await _db.Users.AsNoTracking().ToListAsync());
 
@@ -35,6 +36,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<IActionResult> Delete(int id)
     {
         var user = await _db.Users.FindAsync(id);
