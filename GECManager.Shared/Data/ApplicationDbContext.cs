@@ -22,5 +22,10 @@ public class ApplicationDbContext : DbContext
             .WithMany()
             .HasForeignKey(us => us.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Project>()
+            .HasMany(p => p.Tasks)
+            .WithOne()
+            .HasForeignKey(t => t.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

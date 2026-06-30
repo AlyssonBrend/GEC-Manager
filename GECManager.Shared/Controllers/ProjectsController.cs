@@ -18,7 +18,7 @@ public class ProjectsController : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Project>>> GetAll()
-        => Ok(await _db.Projects.Include(p => p.Tasks).AsNoTracking().ToListAsync());
+        => Ok(await _db.Projects.AsNoTracking().ToListAsync());
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Project>> Get(int id)

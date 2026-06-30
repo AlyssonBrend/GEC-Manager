@@ -45,7 +45,11 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
         .AllowCredentials()
 ));
 
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "GECManager_SuperSecretKey_2024_MustBe32CharsLong!");
+var jwtKeyStr = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("Jwt:Key não configurado. Defina-o em appsettings ou variáveis de ambiente.");
+if (jwtKeyStr.Length < 32)
+    throw new InvalidOperationException("Jwt:Key deve ter no mínimo 32 caracteres.");
+var key = Encoding.UTF8.GetBytes(jwtKeyStr);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

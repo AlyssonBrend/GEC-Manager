@@ -22,7 +22,9 @@ public class TokenService : ITokenService
             new Claim(ClaimTypes.Role, user.Role)
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? "ReplaceWithASecretKey123!"));
+        var rawKey = _config["Jwt:Key"]
+            ?? throw new InvalidOperationException("Jwt:Key não configurado.");
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(rawKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.UtcNow.AddMinutes(double.Parse(_config["Jwt:ExpiryMinutes"] ?? "120"));
 

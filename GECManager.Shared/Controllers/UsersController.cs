@@ -3,6 +3,7 @@ using GECManager.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace GECManager.Api.Controllers;
 
@@ -30,6 +31,11 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Update(int id, User updated)
     {
         if (id != updated.Id) return BadRequest();
+
+        var callerId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var cid) ? cid : 0;
+        var isAdmin = User.IsInRole("Admin");
+        if (callerId != id && !isAdmin) return Forbid();
+
         _db.Entry(updated).State = EntityState.Modified;
         await _db.SaveChangesAsync();
         return NoContent();
