@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\GECManager.Api.props" />
-</Project>

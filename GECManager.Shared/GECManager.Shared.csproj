@@ -4,16 +4,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <!-- Apenas Models e DTOs são compilados aqui; o resto pertence ao GECManager.Api.csproj -->
-  <ItemGroup>
-    <Compile Remove="Controllers\**" />
-    <Compile Remove="Data\**" />
-    <Compile Remove="Services\**" />
-    <Compile Remove="Hubs\**" />
-    <Compile Remove="Entities\**" />
-    <Compile Remove="Program.cs" />
-    <Compile Remove="Class1.cs" />
-    <Compile Remove="index.html" />
-  </ItemGroup>
 </Project>

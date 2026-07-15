@@ -1,5 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GECManager.Shared.Models;
 
+// Como string no JSON, para API e clientes concordarem ("Pending", não 0)
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TaskItemStatus { Pending, InProgress, Done }
 
 public class TaskItem

@@ -20,7 +20,10 @@ else
         </div>
         <div class="d-flex gap-2">
             <a href="/chat/@Id" class="btn btn-outline-secondary">💬 Chat</a>
-            <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Tarefa</button>
+            @if (_canManage)
+            {
+                <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Tarefa</button>
+            }
         </div>
     </div>
 
@@ -62,18 +65,24 @@ else
                                         <div class="small text-danger">⏰ @t.DueDate.Value.ToString("dd/MM/yyyy")</div>
                                     }
                                     <div class="d-flex gap-1 mt-2">
-                                        @if (t.Status != TaskItemStatus.Pending)
+                                        @if (_canManage || t.AssignedUserId == _userId)
                                         {
-                                            <button class="btn btn-xs btn-outline-secondary" style="font-size:.75rem;padding:1px 6px"
-                                                @onclick="() => MoveTask(t, t.Status - 1)">←</button>
+                                            @if (t.Status != TaskItemStatus.Pending)
+                                            {
+                                                <button class="btn btn-xs btn-outline-secondary" style="font-size:.75rem;padding:1px 6px"
+                                                    @onclick="() => MoveTask(t, t.Status - 1)">←</button>
+                                            }
+                                            @if (t.Status != TaskItemStatus.Done)
+                                            {
+                                                <button class="btn btn-xs btn-outline-primary" style="font-size:.75rem;padding:1px 6px"
+                                                    @onclick="() => MoveTask(t, t.Status + 1)">→</button>
+                                            }
                                         }
-                                        @if (t.Status != TaskItemStatus.Done)
+                                        @if (_canManage)
                                         {
-                                            <button class="btn btn-xs btn-outline-primary" style="font-size:.75rem;padding:1px 6px"
-                                                @onclick="() => MoveTask(t, t.Status + 1)">→</button>
+                                            <button class="btn btn-xs btn-outline-danger ms-auto" style="font-size:.75rem;padding:1px 6px"
+                                                @onclick="() => DeleteTask(t.Id)">✕</button>
                                         }
-                                        <button class="btn btn-xs btn-outline-danger ms-auto" style="font-size:.75rem;padding:1px 6px"
-                                            @onclick="() => DeleteTask(t.Id)">✕</button>
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +101,8 @@ else
     List<TaskItem> _tasks = new();
     TaskItemDTO _dto = new();
     bool _showForm;
+    bool _canManage;
+    int _userId;
 
     record Column(string Label, TaskItemStatus Status, string HeaderClass);
     readonly Column[] _columns =
@@ -105,6 +116,13 @@ else
     {
         if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
         _project = await ProjSvc.GetAsync(Id);
+        var user = await Auth.GetCurrentUserAsync();
+        if (user.HasValue && _project is not null)
+        {
+            _userId = user.Value.Id;
+            _canManage = user.Value.Role == "Admin"
+                || (user.Value.Role == "Leader" && _project.OwnerId == _userId);
+        }
         await LoadTasks();
     }
 

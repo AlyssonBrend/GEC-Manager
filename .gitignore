@@ -1,0 +1,18 @@
+# Build
+bin/
+obj/
+*.user
+*.tmp
+
+# Visual Studio
+.vs/
+
+# Banco local de desenvolvimento
+*.db
+*.db-shm
+*.db-wal
+
+# Segredos e ambiente
+*.pfx
+.env
+.env.*

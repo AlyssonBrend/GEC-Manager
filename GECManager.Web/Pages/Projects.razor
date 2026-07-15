@@ -7,7 +7,10 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Projetos</h3>
-    <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Novo projeto</button>
+    @if (_podeCriar)
+    {
+        <button class="btn btn-primary" @onclick="() => _showForm = !_showForm">+ Novo projeto</button>
+    }
 </div>
 
 @if (_showForm)
@@ -50,7 +53,10 @@ else
                     <div class="card-footer d-flex gap-2">
                         <a href="/projects/@p.Id" class="btn btn-sm btn-outline-primary">Abrir</a>
                         <a href="/chat/@p.Id" class="btn btn-sm btn-outline-secondary">Chat</a>
-                        <button class="btn btn-sm btn-outline-danger ms-auto" @onclick="() => DeleteProject(p.Id)">Excluir</button>
+                        @if (_isAdmin || p.OwnerId == _userId)
+                        {
+                            <button class="btn btn-sm btn-outline-danger ms-auto" @onclick="() => DeleteProject(p.Id)">Excluir</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -62,10 +68,19 @@ else
     List<Project>? _projects;
     ProjectDTO _dto = new();
     bool _showForm;
+    bool _podeCriar, _isAdmin;
+    int _userId;
 
     protected override async Task OnInitializedAsync()
     {
         if (!await Auth.TryRestoreTokenAsync()) { Nav.NavigateTo("/login"); return; }
+        var user = await Auth.GetCurrentUserAsync();
+        if (user.HasValue)
+        {
+            _userId = user.Value.Id;
+            _isAdmin = user.Value.Role == "Admin";
+            _podeCriar = _isAdmin || user.Value.Role == "Leader";
+        }
         await LoadProjects();
     }
 
